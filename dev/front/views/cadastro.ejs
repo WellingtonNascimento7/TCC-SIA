@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <%- include ('partials/header.ejs') %>
+<body>
+    <div class="container w-100 p-3" >
+        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
+            <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
+                <br>
+                <div class="card-title">
+                    <h1>Cadastro</h1>
+                    <br>
+                </div>
+                <div class="card-body">
+                    <label>Nome:</label>
+                    <input type="text" name="nome" id="nome" placeholder="Digite seu nome" class="form-control">
+                    <br>
+                    <label>Data de Nascimento:</label>
+                    <input type="date" name="nascimento" id="nascimento" placeholder="dd/mm/aaaa" class="form-control">
+                    <br>
+                    <label>Telefone:</label>
+                    <input type="tel" name="telefone" id="telefone" placeholder="(11) 12345-6789" class="form-control">
+                    <br>
+                    <label>E-mail:</label>
+                    <input type="email" name="email" id="email" placeholder="Digite seu e-mail" class="form-control">
+                    <br>
+                    <label>Senha:</label>
+                    <input type="password" name="senha" id="senha" placeholder="Digite sua senha" class="form-control">
+                    <br>
+                    <label>Confirmar Senha:</label>
+                    <input type="password" name="confSenha" id="confSenha" placeholder="Digite sua senha" class="form-control">
+                    <br><br>
+                    <button type="button" class="btn btn-lg btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" onclick="criarUsuario()">Cadastrar</button>
+                    <br><br>
+                    <a href="/"><h5>Voltar</h5></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function criarUsuario(){
+
+        var nomeInput = $("#nome"); 
+        var nascimentoInput = $("#nascimento");
+        var telefoneInput = $("#telefone");
+        var emailInput = $("#email");
+        var senhaInput = $("#senha");
+        var confSenha = $("#confSenha");
+
+        var usuario = {
+            nome: nomeInput.val(),
+            nascimento: nascimentoInput.val(),
+            telefone: telefoneInput.val(),
+            email: emailInput.val(),
+            senha: senhaInput.val()
+        }        
+
+        axios.post("http://localhost:8081/user/usuario",usuario).then(response => {
+            if(response.status == 200){
+                alert("Usuário cadastrado!");
+                window.location.href = "/";
+            }                
+            
+        }).catch(error => {
+            alert(error)
+            console.log(error);
+        });
+
+    }
+</script>
+</html>

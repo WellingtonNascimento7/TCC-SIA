@@ -1,0 +1,6 @@
+"POST": "http://localhost:8081/user/logar"
+
+{
+    "email": "alisson@teste.com",
+    "senha": "123"
+}

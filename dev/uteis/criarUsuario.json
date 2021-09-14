@@ -1,0 +1,9 @@
+"GET": "http://localhost:8081/user/usuario"
+
+{
+	"nome": "Alisson",
+    "nascimento": "2019-07-04T13:33:03.969Z",
+	"telefone": "1125585518",
+	"email": "alisson@teste.com",
+	"senha": "123"
+}

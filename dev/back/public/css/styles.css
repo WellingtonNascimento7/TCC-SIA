@@ -1,0 +1,155 @@
+/**************************
+DEFINIÇÕES GERAIS
+***************************/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Helvetica;
+  color: #323232;
+  border: none;
+}
+
+body {
+  background-image: url('../img/background.jpg');
+  background-size: cover;
+  background-position-y: -200px;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+a {
+  font-size: .8rem;
+}
+
+a:hover {
+  color: #08558B;
+}
+
+.teste{
+  font-size: 16px
+}
+
+
+/* container login */
+#login-container {
+  background-color: #FFF;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  padding: 20px 30px;
+  margin-top: 10vh;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* formulário */
+form {
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+label, input {
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+label {
+  font-weight: bold;
+  font-size: .8rem;
+}
+
+/**************************
+DEFINIÇÕES DE BOTÃO
+***************************/
+
+input {
+  border-bottom: 2px solid #323232;
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+input:focus {
+  border-bottom: 2px solid #08558B;
+}
+
+#forgot-pass {
+  display: block;
+  text-align: right;
+}
+
+.botao {
+  text-align: center;
+  text-transform: uppercase;
+  border: none;
+  height: 40px;
+  border-radius: 20px;
+  margin-top: 30px;
+  cursor: pointer;
+  color: #FFF;
+  background-color: #08558B;
+  font-weight: bold;
+}
+
+.botao:hover {
+  background-color: #1B223C;
+  transition: .5s;
+}
+
+.botaovoltar {
+  text-align: center;
+  text-transform: uppercase;
+  border: none;
+  height: 40px;
+  border-radius: 20px;
+  margin-top: 30px;
+  cursor: pointer;
+  color: #000;
+  background-color: #FFF;
+  font-weight: bold;
+}
+.botaovoltar:hover {
+  border: solid;
+border-color: #000;
+  transition: .1s;
+}
+
+/* redes sociais */
+
+/**************************
+DEFINIÇÕES DE TÍTULO
+***************************/
+.titulo{
+  font-size: 25px;
+  font-weight: bold;
+  color: #08558B;
+
+} 
+
+.titulo-cabecalho{
+  font-size: 30px;
+}
+
+.titulo-principal{
+  font-size: 25px;
+  font-weight: bold;
+  color: #08558B;
+  margin: 20px 0 30px;
+  text-align: center;
+}
+
+.titulo-rodape{
+  font-size: 20px;
+}
+
+/**************************
+DEFINIÇÕES DE Borda
+***************************/
+.borda1 {
+    border: 1px solid #08558B;
+}
