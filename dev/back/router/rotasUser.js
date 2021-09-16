@@ -16,8 +16,6 @@ router.get('/usuarios/:id',userController.selecionausuario);
 
 
 // Adicionar
-router.post('/usuario2',userController.add);
-
 router.post('/usuario',userController.create);
 
 // Atualizar

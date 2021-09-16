@@ -1,63 +1,54 @@
 const Estab = require('../model/Estabelecimento');
-
+//const Endereco = require('./enderecoController');
+const Endereco = require('../model/EnderecoEstab');
 exports.test = function (req, res) {
   res.send('Olá! Teste ao Controller');
 };
 
-// TODO: listar pontos de interesse da BD
-exports.details = function (req, res) {
-  res.send({type: 'GET'});
-};
-
 // ADICIONAR ESTABELECIMENTO
-
-
-
-
 exports.create = (req, res) => { 
-  Estab.create({nome: req.body.nome, dataCadastro: req.body.dataCadastro}).then((estab) => {
-  res.send(estab);
+  Estab.create({nome: req.body.nome, horariofunc: req.body.horariofunc}).then((estab) => {
+  Endereco.create({cep: req.body.cep, logradouro: req.body.logradouro, numero: req.body.numero, 
+    estado: req.body.estado, cidade: req.body.cidade, complemento: req.body.complemento, estabelecimento: estab._id }).then((endereco) =>{
+  res.send(endereco);})
   });
 };
 
-/*exports.create = function (req, res) {
-  res.send({
-   type: 'POST',
-   name: req.body.nome,
-   rank: req.body.dataCadastro});
-};*/
-
-// ATUALIZAR ESTABELECIMENTO
-//exports.update = function (req, res) {
-//  res.send({type: 'PUT'});
-//};
-
+ //ATUALIZA ESTABELECIMENTO
 exports.update = (req, res, next) => {
-   Estab.findByIdAndUpdate({_id: req.params.id},
-                    req.body).then(() =>{ //o findOne seleciona o que usuario q foi atualizado
-     Estab.findOne({_id: req.params.id}).then((estab) => {
-       res.send(estab);
+   Estab.findOneAndUpdate({_id: req.params.id}, {nome: req.body.nome, horariofunc: req.body.horariofunc}).then(() =>{
+    Endereco.findOneAndUpdate({estabelecimento: req.params.id},
+                    {cep: req.body.cep, logradouro: req.body.logradouro, numero: req.body.numero, 
+                      estado: req.body.estado, cidade: req.body.cidade, complemento: req.body.complemento}).then(() =>{ //o findOne seleciona o que usuario q foi atualizado
+      
+     Endereco.findOne({estabelecimento: req.params.id}).populate('estabelecimento').then((endereco) => {
+       res.send(endereco);
      });
+   })
+   
    }).catch(next);
 };
 
 // DELETAR ESTABELECIMENTO
-//exports.delete = function (req, res) {
-//  res.send({type: 'DELETE'});
-//};
-
-// o next serve só para não travar o programa
-exports.delete = (req, res, next) => {
-  Estab.findByIdAndRemove({_id: req.params.id}).then((estab) =>{
-    res.send(estab);
+exports.delete = (req, res, next) => {  
+  Endereco.findOneAndDelete({estabelecimento: req.params.id}).populate('estabelecimento').then((endereco) =>{
+    Estab.findOneAndDelete({_id: req.params.id}).then(() =>{
+      res.send(endereco);
+    })    
   }).catch(next);
 };
 
 // SELECT * FROM
 exports.listaestab = (req, res) => {
-   Estab.find({}).then((pi) => {
+   Endereco.find({}).populate('estabelecimento').then((pi) => {
    res.send(pi);
    });
+};
+
+//SELECIONA UM ESTABELECIMENTO
+exports.estab = (req, res) => {
+   Endereco.findOne({estabelecimento: req.params.id}).populate('estabelecimento').then((pi) => {
+   res.send(pi);});
 };
 
 // SELECIONA ESTABELECIMENTO PELO ID

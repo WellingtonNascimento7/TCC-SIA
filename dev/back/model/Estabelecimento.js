@@ -6,9 +6,13 @@ const Estabelecimento = new Schema({
 		type: String,
 		required: true
 	},
+	horariofunc:{
+		type: String,
+		required: true
+	},
 	dataCadastro:{
 		type: Date,
-		required: true,
+		required: false,
 		defaut: Date.now()
 	},
 	

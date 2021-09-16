@@ -1,0 +1,11 @@
+"POST": "http://localhost:8081/e/estab/"
+{   
+   "nome": "Extra",
+   "horariofunc": "08:00 - 17:00",
+   "cep":"123456",
+   "logradouro": "Av. José Pinheiro Borges - Itaquera,",
+   "numero": "123", 
+   "estado": "SP",
+   "cidade": "São Paulo",
+   "complemento": "conjunto 4654"
+}

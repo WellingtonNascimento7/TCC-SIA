@@ -10,22 +10,6 @@ exports.details = function (req, res) {
 };
 
 // ADICIONAR USUARIO
-exports.add = function (req, res) {
-  res.send({type: 'POSTerrado'});
-};
-
-// adicionar novo ponto de interesse
-/*exports.create = function (req, res) {
-  console.log('You made a POST request: ', req.body);
-  res.send({
-   type: 'POST',
-   name: req.body.name,
-   nascimento: req.body.nascimento,
-   telefone: req.body.telefone,
-   email: req.body.email,
-   senha: req.body.senha });
-};*/
-
 
 exports.create = (req, res) => { 
   User.create(req.body).then((user) => {
@@ -33,11 +17,8 @@ exports.create = (req, res) => {
   });
 };
 
-// ATUALIZAR USUARIO
-//exports.update = function (req, res) {
-//  res.send({type: 'PUT'});
-//};
 
+//Atualiza Usuario
 exports.update = (req, res, next) => {
    User.findByIdAndUpdate({_id: req.params.id},
                     req.body).then(() =>{ //o findOne seleciona o que usuario q foi atualizado
@@ -47,10 +28,7 @@ exports.update = (req, res, next) => {
    }).catch(next);
 };
 
-// DELETAR USUARIO
-//exports.delete = function (req, res) {
-//  res.send({type: 'DELETE'});
-//};
+
 
 // o next serve só para não travar o programa
 exports.delete = (req, res, next) => {

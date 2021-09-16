@@ -1,0 +1,210 @@
+{
+	"info": {
+		"_postman_id": "e75af927-7a83-4d29-b2b6-193fb25651cb",
+		"name": "TCC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "cadastroUsuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \r\n   \"nome\": \"Teste update\",\r\n   \"nascimento\": \"01/01/2001\",\r\n   \"telefone\": \"1234-1234\",\r\n   \"email\": \"Teste@gmail.com\",\r\n   \"senha\": \"123456\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/user/usuario/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"user",
+						"usuario",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "selecionarUsuarios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/user/usuarios/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"user",
+						"usuarios",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "atualizarUsuarios",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n   \"nome\": \"Teste update feito\",\r\n   \"nascimento\": \"01/01/2001\",\r\n   \"telefone\": \"1234-1234\",\r\n   \"email\": \"Teste@gmail.com\",\r\n   \"senha\": \"123456\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/user/usuario/611a701dae31740d2c65775e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"user",
+						"usuario",
+						"611a701dae31740d2c65775e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletarUsuario",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/user/usuario/611a6c82cf598123a02a5569",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"user",
+						"usuario",
+						"611a6c82cf598123a02a5569"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cadastroEstabelecimento",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \r\n   \"nome\": \"testedelete\",  \r\n   \"horariofunc\": \"08:00 - 17:00\",\r\n   \"cep\":\"123456\",\r\n   \"logradouro\": \"Rua teste delete\",\r\n   \"numero\": \"123\", \r\n   \"estado\": \"SP\",\r\n   \"cidade\": \"São Paulo\",\r\n   \"complemento\": \"conjunto 15\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/e/estab/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"e",
+						"estab",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "atualizarEstabelecimento",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n   \"nome\": \"Extra2\",\r\n   \"horariofunc\": \"08:00 - 17:00\",\r\n   \"cep\":\"123456\",\r\n   \"logradouro\": \"Av. José Pinheiro Borges - Itaquera,\",\r\n   \"numero\": \"123\", \r\n   \"estado\": \"SP\",\r\n   \"cidade\": \"São Paulo\",\r\n   \"complemento\": \"conjunto 4654\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/e/estab/6143578c26b8f62124c218ef",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"e",
+						"estab",
+						"6143578c26b8f62124c218ef"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListaEstabelecimentos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/e/estab/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"e",
+						"estab",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "selecionarUmEstabelecimento",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "deletarestabelecimento",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	]
+}

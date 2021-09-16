@@ -12,7 +12,7 @@ const estabController = require('../controllers/estabController');
 // Listar
 router.get('/estab', estabController.listaestab);
 
-//router.get('/estab/:id', estabController.selecionausuario);
+router.get('/estab/:id', estabController.estab);
 
 
 // Adicionar
