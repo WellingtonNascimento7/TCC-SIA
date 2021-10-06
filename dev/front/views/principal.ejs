@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<%- include ('partials/header.ejs') %>
+
+    <body>
+        <div class="container w-100 p-3">
+            <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
+                <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
+                    <div class="card-title">
+                        <br>
+                        <h1>Aglomerômetro</h1>
+                        <hr>
+                    </div>
+                    <div class="card-body">
+                        <div id="estabelecimentos">
+                        </div>
+                        <a href="/" class="btn btn-lg btn-secondary col-lg-2 col-md-2 col-sm-2 col-xs-2">Sair</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        $(document).ready(function () {
+            axios.get("http://localhost:8081/e/estab").then(response => {
+                var estabelecimentos = response.data;
+                var list = document.getElementById("estabelecimentos");
+
+                estabelecimentos.forEach(e => {
+                    var div = document.createElement("div");
+                    div.id = `${e.estabelecimento._id}`
+                    div.innerHTML = `
+                    <h4>${e.estabelecimento.nome}</h4>
+                    <h6>${e.logradouro} ${e.numero}</h6>
+                    <p>Horário de funcionamento: ${e.estabelecimento.horariofunc}</p>
+                    <p>Situação: <b>CHEIO</b></p>
+                    <hr>`;
+
+                    document.getElementById("estabelecimentos").appendChild(div);
+                });
+            }).catch(error => {
+                console.log(error);
+            });
+        });
+    </script>
+
+</html>

@@ -1,7 +1,8 @@
 <html>
-    <%- include ('partials/header.ejs') %>
+<%- include ('partials/header.ejs') %>
+
     <body>
-        <div class="container w-100 p-3" >
+        <div class="container w-100 p-3">
             <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
                 <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
                     <br>
@@ -11,27 +12,31 @@
                     </div>
                     <div class="card-body">
                         <form method="POST">
-                        <label>E-mail:</label>
-                        <input type="email" name="email" id="email" placeholder="Digite seu e-mail" class="form-control">
-                        <br>
-                        <label>Senha:</label>
-                        <input type="password" name="senha" id="senha" placeholder="Digite sua senha" class="form-control">
-                        <br>
-                        <a style="float: right;" href="#">Esqueceu sua senha?</a>
-                        <br><br>
-                        <button type="button" class="btn btn-lg btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" onclick="logar()">Entrar</button>
-                        <hr>
-                        <h5>Ainda não possui conta?</h5>
-                        <a class="btn btn-lg btn-dark col-lg-4 col-md-4 col-sm-4 col-xs-4" href="/cadastro">Cadastrar-se</a>
-                    </form>
+                            <label>E-mail:</label>
+                            <input type="email" name="email" id="email" placeholder="Digite seu e-mail"
+                                class="form-control">
+                            <br>
+                            <label>Senha:</label>
+                            <input type="password" name="senha" id="senha" placeholder="Digite sua senha"
+                                class="form-control">
+                            <br>
+                            <a style="float: right;" href="#">Esqueceu sua senha?</a>
+                            <br><br>
+                            <button type="button" class="btn btn-lg btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6"
+                                onclick="logar()">Entrar</button>
+                            <hr>
+                            <h5>Ainda não possui conta?</h5>
+                            <a class="btn btn-lg btn-dark col-lg-4 col-md-4 col-sm-4 col-xs-4"
+                                href="/cadastro">Cadastrar-se</a>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </body>
     <script>
-        function logar(){
-            var emailInput = $("#email"); 
+        function logar() {
+            var emailInput = $("#email");
             var senhaInput = $("#senha");
 
             var usuario = {
@@ -39,23 +44,24 @@
                 senha: senhaInput.val(),
             }
 
-            axios.post("http://localhost:8081/user/logar",usuario).then(response => {
-                if(response.status == 200){
+            axios.post("http://localhost:8081/user/logar", usuario).then(response => {
+                if (response.status == 200) {
                     var objectUsuario = response.data;
 
-                    if (jQuery.isEmptyObject(objectUsuario)){
+                    if (jQuery.isEmptyObject(objectUsuario)) {
                         alert("E-mail ou senha inválidos.");
                     }
-                    else{
+                    else {
                         alert("Logado com sucesso!");
                         window.location.href = "principal";
                     }
-                }                
+                }
             }).catch(error => {
                 alert("Erro ao efetuar login")
             });
 
-            
+
         }
     </script>
+
 </html>

@@ -12,7 +12,7 @@ app.get("/cadastro/", (req, res) => {
 })
 
 app.get("/principal/", (req, res) => {
-    res.send("<h1>USUÁRIO LOGADO!</h1><h3>Aqui será a tela principal</h3><a href='/'>voltar</a>");
+    res.render("principal");
 })
 
 app.listen(8090,() => {
