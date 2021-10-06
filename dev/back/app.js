@@ -4,6 +4,8 @@ const app = express();
 const path = require('path');
 const routes = require('./router/rotasUser');
 const routesEstab = require('./router/rotasEstabelecimentos');
+const routesStatus = require('./router/rotasStatus');
+const routesGeoloc = require('./router/rotasGeolocalizacao');
 const bodyParser = require('body-parser');
 const mongoose = require ('mongoose');
 const cors = require("cors");
@@ -37,6 +39,8 @@ app.use(cors());
 
 	app.use('/user', routes);
 	app.use('/e', routesEstab);
+	app.use('/s', routesStatus);
+	app.use('/g', routesGeoloc);
 	mongoose.set('useFindAndModify', false);
 
 
