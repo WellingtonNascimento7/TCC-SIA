@@ -1,6 +1,7 @@
 const Estab = require('../model/Estabelecimento');
 const User = require('../model/Usuario');
 const Status = require('../model/StatusMovimento');
+var mongoose = require('mongoose');
 //const Endereco = require('./enderecoController');
 //const Endereco = require('../model/EnderecoEstab');
 
@@ -47,19 +48,38 @@ exports.statusestab = async (req, res) => {
    //Status.aggregate.group({ _id: "$estabelecimento" }).then((status) => {
 
     //AINDA TA RUIM MAIS TA FUNCIONANDO
+    var data1 = new Date(Date.now());
+    var data2 = new Date(Date.now());
+    data2.setHours(data1.getHours()-4);
+    var id = mongoose.Types.ObjectId(req.params.estab);
     const status = await Status.aggregate([
-     /*{
-      $match: {estabelecimento: req.params.estab}
-     },*/
+     {
+      $match: {estabelecimento: id,
+              datainsercao: {$gte: data2, $lte: data1}}
+     },
      {
       $group: {
-        _id: '$estabelecimento',
-        media: {$avg: '$status'},
+        _id: '$status',                
         contador: {$sum: 1}
       }
      }
       ])
-    
-   res.send(status);};
-//};
+   var pegar = getStatus(status);
+   res.send({Status: pegar});
+  
+};
+
+function getStatus(status) {
+  var cont = 0, cont2;
+
+  for(let i in status){
+    if(status[i].contador >= cont){
+      cont = status[i].contador;
+      cont2 = status[i]._id;
+    }
+  }
+
+  return cont2;
+}
+
 
