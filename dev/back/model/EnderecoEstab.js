@@ -19,6 +19,10 @@ const EnderecoEstab = new Schema({
 		type: String,
 		required: true
 	},
+	bairro:{
+		type: String,
+		required: true
+	},
 	estado:{
 		type: String,
 		required: true

@@ -25,6 +25,9 @@ router.put('/estab/:id', estabController.update);
 // Deletar
 router.delete('/estab/:id', estabController.delete);
 
+//PESQUISAR
+router.get('/estab/pesquisa/:busca', estabController.pesquisa);
+
 /*router.get('/', (req, res) => {
 	res.render("estab/index");
 })*/

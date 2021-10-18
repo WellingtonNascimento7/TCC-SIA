@@ -114,7 +114,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \r\n   \"nome\": \"Centauro\",  \r\n   \"horariofunc\": \"08:00 - 17:00\",\r\n   \"cep\":\"123456\",\r\n   \"logradouro\": \"\",\r\n   \"numero\": \"\", \r\n   \"estado\": \"SP\",\r\n   \"cidade\": \"São Paulo\",\r\n   \"complemento\": \"conjunto 15\"\r\n}\r\n\r\n",
+					"raw": "{\r\n   \r\n   \"nome\": \"World Tennis 4\",  \r\n   \"horariofunc\": \"08:00 - 17:00\",\r\n   \"cep\": \"08220900\",\r\n   \"logradouro\": \"Av. José Pinheiro Borges \",\r\n   \"numero\": \"4561\",\r\n   \"bairro\": \"Itaquera\", \r\n   \"estado\": \"SP\",\r\n   \"cidade\": \"São Paulo\",\r\n   \"complemento\": \"loja 49\"\r\n}\r\n\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -144,7 +144,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{   \r\n   \"nome\": \"Extra\",\r\n   \"horariofunc\": \"08:00 - 17:00\",\r\n   \"cep\":\"123456\",\r\n   \"logradouro\": \"Av. José Pinheiro Borges - Itaquera,\",\r\n   \"numero\": \"123\", \r\n   \"estado\": \"SP\",\r\n   \"cidade\": \"São Paulo\",\r\n   \"complemento\": \"conjunto 4654\"\r\n}",
+					"raw": "{   \r\n   \"nome\": \"World Tennis 41\",  \r\n   \"horariofunc\": \"08:00 - 17:00\",\r\n   \"cep\": \"08220900\",\r\n   \"logradouro\": \"Av. José Pinheiro Borges \",\r\n   \"numero\": \"4561\",\r\n   \"bairro\": \"Itaquera\", \r\n   \"estado\": \"SP\",\r\n   \"cidade\": \"São Paulo\",\r\n   \"complemento\": \"loja 49\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -152,7 +152,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/e/estab/6143578c26b8f62124c218ef",
+					"raw": "http://localhost:8081/e/estab/616d805dc4557f1eac267023",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -161,7 +161,7 @@
 					"path": [
 						"e",
 						"estab",
-						"6143578c26b8f62124c218ef"
+						"616d805dc4557f1eac267023"
 					]
 				}
 			},
@@ -215,7 +215,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/e/estab/6143578c26b8f62124c218ef",
+					"raw": "http://localhost:8081/e/estab/616d7fb9054c5f16c45d081c",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -224,7 +224,7 @@
 					"path": [
 						"e",
 						"estab",
-						"6143578c26b8f62124c218ef"
+						"616d7fb9054c5f16c45d081c"
 					]
 				}
 			},
@@ -232,20 +232,18 @@
 		},
 		{
 			"name": "cadastrarStatus",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \r\n   \"estabelecimento\": \"6142127f9850ac24383c34f8\",\r\n   \"usuario\": \"6126b919f871f61e3cbd896a\",\r\n   \"status\": 1\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\r\n   \r\n   \"estabelecimento\": \"6142127f9850ac24383c34f8\",\r\n   \"usuario\": \"6126b919f871f61e3cbd896a\",\r\n   \"status\": 4\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8081/s/status/",
+					"raw": "http://localhost:8081/s/status/61571e80b141b3209c3d3ee6",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -254,7 +252,7 @@
 					"path": [
 						"s",
 						"status",
-						""
+						"61571e80b141b3209c3d3ee6"
 					]
 				}
 			},
@@ -359,7 +357,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/s/status/estab/61435973c1686f23f8f7794c",
+					"raw": "http://localhost:8081/s/status/estab/6142127f9850ac24383c34f8",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -369,7 +367,7 @@
 						"s",
 						"status",
 						"estab",
-						"61435973c1686f23f8f7794c"
+						"6142127f9850ac24383c34f8"
 					]
 				}
 			},
@@ -399,6 +397,28 @@
 					"path": [
 						"g",
 						"distancia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pesquisaEstabelecimento",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/e/estab/pesquisa/41",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"e",
+						"estab",
+						"pesquisa",
+						"41"
 					]
 				}
 			},
