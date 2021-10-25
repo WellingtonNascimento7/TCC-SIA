@@ -10,7 +10,8 @@ exports.test = function (req, res) {
 exports.create = (req, res) => { 
   Estab.create({nome: req.body.nome, horariofunc: req.body.horariofunc}).then((estab) => {
     Endereco.create({cep: req.body.cep, logradouro: req.body.logradouro, numero: req.body.numero, bairro: req.body.bairro,
-    estado: req.body.estado, cidade: req.body.cidade, complemento: req.body.complemento, estabelecimento: estab._id }).then((endereco) =>{
+    estado: req.body.estado, cidade: req.body.cidade, complemento: req.body.complemento, estabelecimento: estab._id, 
+    geometry: {type: "point", coordinates: [req.body.lng, req.body.lat]}}).then((endereco) =>{
       Endereco.findOne({_id: endereco._id}).populate('estabelecimento').then((ender) => {
         Tags.create({enderecoEstab: ender._id, tags: generateTags(ender)}).then(() =>{
           res.send(endereco);
@@ -25,7 +26,8 @@ exports.update = (req, res, next) => {
    Estab.findOneAndUpdate({_id: req.params.id}, {nome: req.body.nome, horariofunc: req.body.horariofunc}).then(() =>{
     Endereco.findOneAndUpdate({estabelecimento: req.params.id},
                     {cep: req.body.cep, logradouro: req.body.logradouro, numero: req.body.numero, 
-                      estado: req.body.estado, cidade: req.body.cidade, complemento: req.body.complemento}).then(() =>{ //o findOne seleciona o que usuario q foi atualizado
+                      estado: req.body.estado, cidade: req.body.cidade, complemento: req.body.complemento, 
+                      geometry: {type: "point", coordinates: [req.body.lng, req.body.lat]}}).then(() =>{ //o findOne seleciona o que usuario q foi atualizado
       
       Endereco.findOne({estabelecimento: req.params.id}).populate('estabelecimento').then((endereco) => {
         Tags.findOneAndUpdate({enderecoEstab: endereco._id, tags: generateTags(endereco)}).then(() =>{
@@ -121,6 +123,27 @@ function generateTags(estab){
 
     return tags;
 }
+
+// GEOLOCALIZAÇÃO
+exports.estabProximo = (req, res, next) =>{
+    let lng = parseFloat(req.query.lng);
+    let lat = parseFloat(req.query.lat);
+    const maxDist = 10000;
+    Endereco.aggregate([{
+        $geoNear: {
+        near: { 'type': 'Point',
+        coordinates: [parseFloat(lng), parseFloat(lat)] },
+        spherical: true,
+        distanceField: 'distancia',        
+        maxDistance: maxDist
+      },
+
+     },{$limit: 10}]).then((ende) => {
+        Estab.populate(ende, {path: 'estabelecimento'}).then((estab) =>{
+            res.send(estab);
+        });
+     }).catch(next);
+};
 
 
 

@@ -1,14 +1,36 @@
-exports.distancia = (req, res) => { 
+const Estab = require('../model/Estabelecimento');
+//const Endereco = require('./enderecoController');
+const Endereco = require('../model/EnderecoEstab');
+const Tags = require('../model/TagsEstab');
+
+//teste - A rota PROXIMO ja esta trazendo tudo
+exports.distancia = (req, res, next) => { 
   var distancia = (getDistanceFromLatLonInMetros(
    {lat: req.body.lat1, lng: req.body.lng1},
    {lat: req.body.lat2, lng: req.body.lng2}
     ))
     res.send({Distancia :distancia});
-
 };
 
+exports.proximo = (req, res, next) =>{
+    let lng = parseFloat(req.query.lng);
+    let lat = parseFloat(req.query.lat);
+    const maxDist = 10000;
+    Endereco.aggregate([{
+        $geoNear: {
+        near: { 'type': 'Point',
+        coordinates: [parseFloat(lng), parseFloat(lat)] },
+        spherical: true,
+        distanceField: 'distancia',        
+        maxDistance: maxDist
+      },
 
-
+     },{$limit: 10}]).then((ende) => {
+        Estab.populate(ende, {path: 'estabelecimento'}).then((estab) =>{
+            res.send(estab);
+        });
+     }).catch(next);
+};
 
 function getDistanceFromLatLonInMetros(origem, destino) {
     "use strict";
@@ -28,3 +50,8 @@ function getDistanceFromLatLonInMetros(origem, destino) {
         	return res;
         }
 }
+
+//AIzaSyA6I_vZPulkKSmLUL4_xvMqQFOxGUymZpU
+
+
+

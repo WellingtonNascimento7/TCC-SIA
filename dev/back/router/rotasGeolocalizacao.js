@@ -5,6 +5,7 @@ const geolocalizacaoController = require('../controllers/geolocalizacaoControlle
 
 
 router.post('/distancia', geolocalizacaoController.distancia);
+router.get('/proximos', geolocalizacaoController.proximo);
 
 
 

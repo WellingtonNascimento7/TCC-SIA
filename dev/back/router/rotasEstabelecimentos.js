@@ -28,6 +28,9 @@ router.delete('/estab/:id', estabController.delete);
 //PESQUISAR
 router.get('/estab/pesquisa/:busca', estabController.pesquisa);
 
+//GEOLOCALIZAÇÃO
+router.get('/geolo', estabController.estabProximo);
+
 /*router.get('/', (req, res) => {
 	res.render("estab/index");
 })*/

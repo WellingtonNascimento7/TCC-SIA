@@ -144,7 +144,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{   \r\n   \"nome\": \"World Tennis 41\",  \r\n   \"horariofunc\": \"08:00 - 17:00\",\r\n   \"cep\": \"08220900\",\r\n   \"logradouro\": \"Av. José Pinheiro Borges \",\r\n   \"numero\": \"4561\",\r\n   \"bairro\": \"Itaquera\", \r\n   \"estado\": \"SP\",\r\n   \"cidade\": \"São Paulo\",\r\n   \"complemento\": \"loja 49\"\r\n}",
+					"raw": "{   \r\n   \"nome\": \"Centauro\",  \r\n   \"horariofunc\": \"08:00 - 17:00\",\r\n   \"cep\": \"03527900\",\r\n   \"logradouro\": \"Av. Aricanduva\",\r\n   \"numero\": \"5555\",\r\n   \"bairro\": \"Vila Matilde\", \r\n   \"estado\": \"SP\",\r\n   \"cidade\": \"São Paulo\",\r\n   \"complemento\": \"Shopping Anália Franco\",\r\n   \"lng\": -46.501806826539365,\r\n   \"lat\": -23.5622723814893 \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -152,7 +152,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/e/estab/616d805dc4557f1eac267023",
+					"raw": "http://localhost:8081/e/estab/6172c78a9ab95b0ef09dfdc1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -161,7 +161,7 @@
 					"path": [
 						"e",
 						"estab",
-						"616d805dc4557f1eac267023"
+						"6172c78a9ab95b0ef09dfdc1"
 					]
 				}
 			},
@@ -419,6 +419,36 @@
 						"estab",
 						"pesquisa",
 						"41"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "proximos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/e/geolo?lng=-46.46859875910078&lat=-23.534005801652036",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"e",
+						"geolo"
+					],
+					"query": [
+						{
+							"key": "lng",
+							"value": "-46.46859875910078"
+						},
+						{
+							"key": "lat",
+							"value": "-23.534005801652036"
+						}
 					]
 				}
 			},

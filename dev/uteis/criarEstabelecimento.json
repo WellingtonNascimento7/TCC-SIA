@@ -9,3 +9,18 @@
    "cidade": "São Paulo",
    "complemento": "conjunto 4654"
 }
+
+{
+   
+   "nome": "Adidas",  
+   "horariofunc": "08:00 - 17:00",
+   "cep": "3342000",
+   "logradouro": "Av. Reg. Feijó",
+   "numero": "1739",
+   "bairro": "Jardim Analia Franco", 
+   "estado": "SP",
+   "cidade": "São Paulo",
+   "complemento": "Shopping Anália Franco",
+   "lng": -46.5615449292273,
+   "lat": -23.559290561415345 
+}
