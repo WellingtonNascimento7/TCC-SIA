@@ -20,23 +20,67 @@
             </div>
         </div>
     </body>
+    <style>
+        .inline{
+            display: inline;
+        }
+        .font32{
+            font-size: 32px;
+        }
+        .Fechado{
+            color: #000000;
+        }        
+        .Indefinido{
+            color: #b3b3cc;
+        }
+        .Vazio{
+            color: #4db8ff;
+        }
+        .Baixo{
+            color: #00e600;
+        }
+        .Médio{
+            color: #ff9900;
+        }
+        .Cheio{
+            color: #ff3300;
+        }
+        .Lotado{
+            color: #d11aff;
+        }
+    </style>
     <script>
+
+        // var Enum = require('enum');
+        // var myEnum = new Enum({'A': 1, 'B': 2, 'C': 4});
+        // alert(myEnum.A.value);
+
+        var sitEstabelecimento = 'Indefinido';
+
         $(document).ready(function () {
             axios.get("http://localhost:8081/e/estab").then(response => {
                 var estabelecimentos = response.data;
-                var list = document.getElementById("estabelecimentos");
+                var list = document.getElementById("estabelecimentos");               
 
                 estabelecimentos.forEach(e => {
+                    axios.get("http://localhost:8081/s/status/estab/"+e.estabelecimento._id).then(res => {
+                    sitEstabelecimento = res.data.status;
+                    console.log(sitEstabelecimento);
+                        
+
                     var div = document.createElement("div");
                     div.id = `${e.estabelecimento._id}`
                     div.innerHTML = `
                     <h4>${e.estabelecimento.nome}</h4>
                     <h6>${e.logradouro} ${e.numero}</h6>
                     <p>Horário de funcionamento: ${e.estabelecimento.horariofunc}</p>
-                    <p>Situação: <b>CHEIO</b></p>
+                    <p class="inline">Situação: <b><p class="inline font32 ${sitEstabelecimento}">•</p> ${sitEstabelecimento}</b></p>
                     <hr>`;
 
                     document.getElementById("estabelecimentos").appendChild(div);
+//                        console.log(e.estabelecimento._id);
+                    }).catch(error => console.log(error));
+
                 });
             }).catch(error => {
                 console.log(error);

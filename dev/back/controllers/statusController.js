@@ -2,6 +2,16 @@ const Estab = require('../model/Estabelecimento');
 const User = require('../model/Usuario');
 const Status = require('../model/StatusMovimento');
 var mongoose = require('mongoose');
+const Enum = require('enum');
+var enumSitMovimento = new Enum({
+    1: 'Fechado',
+    2: 'Vazio',
+    3: 'Baixo',
+    4: 'Médio',
+    5: 'Cheio',
+    6: 'Lotado',
+    99: 'Indefinido'});
+
 //const Endereco = require('./enderecoController');
 //const Endereco = require('../model/EnderecoEstab');
 
@@ -65,7 +75,8 @@ exports.statusestab = async (req, res) => {
      }
       ])
    var pegar = getStatus(status);
-   res.send({Status: pegar});
+   console.log(pegar);
+   res.send({status: String(pegar) === 'undefined' ? enumSitMovimento.get(String(99)).value : enumSitMovimento.get(String(pegar)).value  });
   
 };
 
