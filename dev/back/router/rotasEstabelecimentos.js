@@ -1,7 +1,9 @@
 const express = require ('express');
 const router = express.Router();
+const {admin} = require("../config/admin");
 // importa controlador 'apiController.js' da pasta: 
 const estabController = require('../controllers/estabController');
+const passport = require('passport');
 //const mongoose = require ('mongoose');
 //require ("../model/Usuario")
 //const Usuarios = mongoose.model("Usuario");
@@ -17,13 +19,13 @@ router.get('/estab/:id', estabController.estab);
 
 // Adicionar
 
-router.post('/estab', estabController.create);
+router.post('/estab', admin, estabController.create);
 
 // Atualizar
-router.put('/estab/:id', estabController.update);
+router.put('/estab/:id', admin, estabController.update);
 
 // Deletar
-router.delete('/estab/:id', estabController.delete);
+router.delete('/estab/:id', admin, estabController.delete);
 
 //PESQUISAR
 router.get('/estab/pesquisa/:busca', estabController.pesquisa);
