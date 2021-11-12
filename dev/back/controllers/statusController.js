@@ -72,13 +72,6 @@ exports.statusestab = async (req, res) => {
       if(data1 < abertura || data1 > fechamento ){
         pegar = 1;
       }
-<<<<<<< HEAD
-     }
-      ])
-   var pegar = getStatus(status);
-   res.send({status: String(pegar) === 'undefined' ? enumSitMovimento.get(String(99)).value : enumSitMovimento.get(String(pegar)).value  });
-  
-=======
     })
 
     if(pegar == 1 ){
@@ -106,7 +99,6 @@ exports.statusestab = async (req, res) => {
     res.send({status: String(pegar) === 'undefined' ? enumSitMovimento.get(String(99)).value : enumSitMovimento.get(String(pegar)).value  });
     }
       
->>>>>>> 5827bbcfe04daf5bb22bebe62dac27ee07cc72f4
 };
 
 function getStatus(status) {
