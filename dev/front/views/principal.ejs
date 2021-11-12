@@ -3,6 +3,7 @@
 <%- include ('partials/header.ejs') %>
 
     <body>
+        <p id="enderecoAPI" hidden="true"><%= endereco %></p>
         <div class="container w-100 p-3">
             <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
                 <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
@@ -10,7 +11,15 @@
                         <br>
                         <h1>Aglomerômetro</h1>
                         <hr>
-                    </div>
+                        <div class="row col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 form-group">
+                                <input id="inputPesquisa" type="text" class="form-control" placeholder="Buscar estabelecimento...">
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group">
+                                <button onclick="Pesquisar()" class="btn btn-primary">Pesquisar</button>
+                            </div>  
+                        </div>
+                    </div>                 
                     <div class="card-body">
                         <div id="estabelecimentos">
                         </div>
@@ -50,35 +59,87 @@
         }
     </style>
     <script>
-
+        var enderecoAPI = document.getElementById("enderecoAPI").textContent;
         // var Enum = require('enum');
         // var myEnum = new Enum({'A': 1, 'B': 2, 'C': 4});
         // alert(myEnum.A.value);
+        function Pesquisar(){
+            $('#estabelecimentos').hide();
+            alert($('#inputPesquisa').val())
+        }
+
+        function getLocation() {
+            
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else { 
+                x.innerHTML = "Geolocation is not supported by this browser.";
+                }
+        }
+
+        function showPosition(position) {
+            alert("Latitude: " + position.coords.latitude + 
+            "Longitude: " + position.coords.longitude);
+        }
 
         var sitEstabelecimento = 'Indefinido';
 
         $(document).ready(function () {
-            axios.get("http://localhost:8081/e/estab").then(response => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else { 
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+
+            axios.get(enderecoAPI + "/e/estab").then(response => {
                 var estabelecimentos = response.data;
                 var list = document.getElementById("estabelecimentos");               
 
                 estabelecimentos.forEach(e => {
-                    axios.get("http://localhost:8081/s/status/estab/"+e.estabelecimento._id).then(res => {
+                    axios.get(enderecoAPI + "/s/status/estab/"+e.estabelecimento._id).then(res => {
                     sitEstabelecimento = res.data.status;
-                    console.log(sitEstabelecimento);
+                    
+                    alert(retornarDistancia(123));
+                    
+                    
                         
 
                     var div = document.createElement("div");
                     div.id = `${e.estabelecimento._id}`
                     div.innerHTML = `
                     <h4>${e.estabelecimento.nome}</h4>
-                    <h6>${e.logradouro} ${e.numero}</h6>
-                    <p>Horário de funcionamento: ${e.estabelecimento.horariofunc}</p>
-                    <p class="inline">Situação: <b><p class="inline font32 ${sitEstabelecimento}">•</p> ${sitEstabelecimento}</b></p>
-                    <hr>`;
+                    <h6>Distância do local: 2 km </h6>
+                    <p>${e.logradouro} ${e.numero}<br>
+                        Horário de funcionamento: ${e.estabelecimento.horariofunc}<br>
+                        <span>Situação: <b><span class="inline font32 ${sitEstabelecimento}">•</span> ${sitEstabelecimento}</b></span>
+                    </p>
+                    <button id="btn${e.estabelecimento._id}" onclick="mostrarSituacao('${e.estabelecimento._id}')" class="btn btn-primary">Atualizar situação</button>
+
+
+                    
+                    <div id="div${e.estabelecimento._id}" style="display: none;">
+                    
+                    
+                    <h5>Atualizar:</h5>
+                    <div class="row col-xs-2 col-sm-2 col-md-2 col-lg-2" align="center">
+                    <select class="form-select" name="cars" id="cars">
+                        <option value="2">Vazio</option>
+                        <option value="3">Baixo</option>
+                        <option value="4">Médio</option>
+                        <option value="5">Cheio</option>
+                        <option value="6">Lotado</option>
+                    </select>
+                    </div>
+                    <br>
+
+
+                    <button id="btnCanc${e.estabelecimento._id}" onclick="cancelarAtualizacao('${e.estabelecimento._id}')" class="btn btn-danger" value="">Cancelar</button>
+                    <button onclick="cancelarAtualizacao('${e.estabelecimento._id}')" class="btn btn-success" value="">Atualizar</button>
+                    </div>
+                    <hr>
+                    `;
 
                     document.getElementById("estabelecimentos").appendChild(div);
-//                        console.log(e.estabelecimento._id);
                     }).catch(error => console.log(error));
 
                 });
@@ -86,6 +147,37 @@
                 console.log(error);
             });
         });
+
+        async function retornarDistancia(idEstabelecimento){
+            /*var lng = -46.410622719;
+            var lat = -23.594082111;
+            var teste;
+
+            let response = await axios.get(enderecoAPI + "/e/geolo?lng="+lng+"&"+"lat="+lat).then(res => {
+                teste = res.data.find(r => r.estabelecimento._id === '618daaf8bfec3304f01e45f2').distancia;
+            }).catch(error => console.log(error));*/
+
+            return idEstabelecimento;
+        }
+
+        function mostrarSituacao(id){
+            var btnEstabelecimento = document.getElementById('btn'+id);
+            var divEstabelecimento = document.getElementById('div'+id);
+            
+            divEstabelecimento.style.display = 'block';
+            btnEstabelecimento.style.display = 'none';
+
+        }
+
+        function cancelarAtualizacao(id){
+            var btnEstabelecimento = document.getElementById('btn'+id);
+            var divEstabelecimento = document.getElementById('div'+id);
+
+            divEstabelecimento.style.display = 'none';
+            btnEstabelecimento.style.display = 'block';
+            
+
+        }
     </script>
 
 </html>

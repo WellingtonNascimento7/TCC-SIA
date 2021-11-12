@@ -75,7 +75,6 @@ exports.statusestab = async (req, res) => {
      }
       ])
    var pegar = getStatus(status);
-   console.log(pegar);
    res.send({status: String(pegar) === 'undefined' ? enumSitMovimento.get(String(99)).value : enumSitMovimento.get(String(pegar)).value  });
   
 };
