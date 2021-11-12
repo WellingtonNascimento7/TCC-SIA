@@ -6,6 +6,7 @@ exports.test = function (req, res) {
   res.send('Olá! Teste ao Controller');
 };
 
+
 // ADICIONAR ESTABELECIMENTO
 exports.create = (req, res) => { 
   Estab.create({nome: req.body.nome, horariofunc: req.body.horariofunc}).then((estab) => {

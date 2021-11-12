@@ -56,27 +56,57 @@ exports.status = (req, res) => {
 exports.statusestab = async (req, res) => {
    //Comando retirado da documentação mais não roda
    //Status.aggregate.group({ _id: "$estabelecimento" }).then((status) => {
+    
+ var data1 = new Date(Date.now());
+    var pegar;
+    console.log(pegar)
+    Estab.findOne({_id: req.params.estab}).then((estab) => {
+      var abertura = new Date(Date.now());
+      var fechamento = new Date(Date.now());
+   
+      const separators = /[\s,\.;:\(\)\-'\+]/g;
+      const func = estab.horariofunc.split(separators)
+      abertura.setHours(func[0], func[1], 0);
+      fechamento.setHours(func[4], func[5], 0);
 
-    //AINDA TA RUIM MAIS TA FUNCIONANDO
-    var data1 = new Date(Date.now());
-    var data2 = new Date(Date.now());
-    data2.setHours(data1.getHours()-4);
-    var id = mongoose.Types.ObjectId(req.params.estab);
-    const status = await Status.aggregate([
-     {
-      $match: {estabelecimento: id,
-              datainsercao: {$gte: data2, $lte: data1}}
-     },
-     {
-      $group: {
-        _id: '$status',                
-        contador: {$sum: 1}
+      if(data1 < abertura || data1 > fechamento ){
+        pegar = 1;
       }
+<<<<<<< HEAD
      }
       ])
    var pegar = getStatus(status);
    res.send({status: String(pegar) === 'undefined' ? enumSitMovimento.get(String(99)).value : enumSitMovimento.get(String(pegar)).value  });
   
+=======
+    })
+
+    if(pegar == 1 ){
+      console.log(pegar);
+      res.send({status: String(pegar) === 'undefined' ? enumSitMovimento.get(String(99)).value : enumSitMovimento.get(String(pegar)).value  });
+    }else{
+      var data2 = new Date(Date.now());
+      data2.setHours(data1.getHours()-4);
+      var id = mongoose.Types.ObjectId(req.params.estab);
+      const status = await Status.aggregate([
+       {
+        $match: {estabelecimento: id,
+                datainsercao: {$gte: data2, $lte: data1}}
+       },
+       {
+        $group: {
+          _id: '$status',                
+          contador: {$sum: 1}
+        }
+       }
+        ])
+
+    pegar = getStatus(status);
+    console.log(pegar);
+    res.send({status: String(pegar) === 'undefined' ? enumSitMovimento.get(String(99)).value : enumSitMovimento.get(String(pegar)).value  });
+    }
+      
+>>>>>>> 5827bbcfe04daf5bb22bebe62dac27ee07cc72f4
 };
 
 function getStatus(status) {
