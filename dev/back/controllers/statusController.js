@@ -57,27 +57,23 @@ exports.statusestab = async (req, res) => {
    //Comando retirado da documentação mais não roda
    //Status.aggregate.group({ _id: "$estabelecimento" }).then((status) => {
     
- var data1 = new Date(Date.now());
-    var pegar;
-    console.log(pegar)
-    Estab.findOne({_id: req.params.estab}).then((estab) => {
+   var data1 = new Date(Date.now());
+   var pegar;
+   const estab = await Estab.findOne({_id: req.params.estab})//.then((estab) => {
       var abertura = new Date(Date.now());
       var fechamento = new Date(Date.now());
-   
       const separators = /[\s,\.;:\(\)\-'\+]/g;
       const func = estab.horariofunc.split(separators)
       abertura.setHours(func[0], func[1], 0);
       fechamento.setHours(func[4], func[5], 0);
-
       if(data1 < abertura || data1 > fechamento ){
         pegar = 1;
       }
-    })
 
-    if(pegar == 1 ){
-      console.log(pegar);
+    if(pegar == 1){
       res.send({status: String(pegar) === 'undefined' ? enumSitMovimento.get(String(99)).value : enumSitMovimento.get(String(pegar)).value  });
     }else{
+      
       var data2 = new Date(Date.now());
       data2.setHours(data1.getHours()-4);
       var id = mongoose.Types.ObjectId(req.params.estab);
@@ -94,12 +90,14 @@ exports.statusestab = async (req, res) => {
        }
         ])
 
-    pegar = getStatus(status);
-    console.log(pegar);
+       pegar = getStatus(status);
+    
+    console.log(pegar + "ultimo");
     res.send({status: String(pegar) === 'undefined' ? enumSitMovimento.get(String(99)).value : enumSitMovimento.get(String(pegar)).value  });
     }
       
 };
+
 
 function getStatus(status) {
   var cont = 0, cont2;
@@ -109,8 +107,7 @@ function getStatus(status) {
       cont = status[i].contador;
       cont2 = status[i]._id;
     }
-  }
-
+  } 
   return cont2;
 }
 

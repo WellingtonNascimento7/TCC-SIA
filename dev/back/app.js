@@ -31,8 +31,7 @@ app.use(cors());
 		app.use(flash());
 
 	// Middleware
-		app.use((req, res, next) => {
-			res.locals.usuario = req.user;
+		app.use((req, res, next) => {			
 			res.locals.sucess_msg = req.flash("sucess_msg");
 			res.locals.error_msg = req.flash("error_msg");
 			res.locals.error = req.flash("error");

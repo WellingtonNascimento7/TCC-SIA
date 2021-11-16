@@ -139,7 +139,7 @@ exports.estabProximo = (req, res, next) =>{
         maxDistance: maxDist
       },
 
-     },{$limit: 10}]).then((ende) => {
+     },{$limit: 10}, {$sort: {distancia: 1}}]).then((ende) => {
         Estab.populate(ende, {path: 'estabelecimento'}).then((estab) =>{
             res.send(estab);
         });
