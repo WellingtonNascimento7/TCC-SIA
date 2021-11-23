@@ -1,7 +1,6 @@
 module.exports = {
 	admin: function(req, res, next){
 
-
 		if(req.isAuthenticated() && req.user.perfil == 1){
 			
 			return next();

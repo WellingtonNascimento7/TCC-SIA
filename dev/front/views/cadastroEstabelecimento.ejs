@@ -41,8 +41,11 @@
                     <label>Longitude:</label>
                     <input type="text" name="longitude" id="longitude" placeholder="-46.407166" class="form-control">
                     <br>
+                    <label>Horário de Funcionamento:</label>
+                    <input type="text" name="horario" id="horario" placeholder="09:00 - 22:00" class="form-control">
+                    <br>
                     <br><br>
-                    <button type="button" class="btn btn-lg btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" onclick="criarUsuario()">Cadastrar</button>
+                    <button type="button" class="btn btn-lg btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" onclick="criarEstabelecimento()">Cadastrar</button>
                     <br><br>
                     <a href="/"><h5>Voltar</h5></a>
                 </div>
@@ -51,31 +54,42 @@
     </div>
 </body>
 <script>
-    function criarUsuario(){
+    function criarEstabelecimento(){
 
         var nomeInput = $("#nome"); 
-        var nascimentoInput = $("#nascimento");
-        var telefoneInput = $("#telefone");
-        var emailInput = $("#email");
-        var senhaInput = $("#senha");
-        var confSenha = $("#confSenha");
-
-        var usuario = {
+        var cepInput = $("#cep");
+        var cidadeInput = $("#cidade");
+        var estadoInput = $("#estado");
+        var bairroInput = $("#bairro");
+        var logradouroInput = $("#logradouro");
+        var numeroInput = $("#numero");
+        var complementoInput = $("#complemento");
+        var latitudeInput = $("#latitude");
+        var longitudeInput = $("#longitude");
+        var horarioInput = $("#horario");
+        
+        var estabelecimento = {
             nome: nomeInput.val(),
-            nascimento: nascimentoInput.val(),
-            telefone: telefoneInput.val(),
-            email: emailInput.val(),
-            senha: senhaInput.val()
-        }        
+            horariofunc: horarioInput.val(),
+            cep: cepInput.val(),
+            logradouro: logradouroInput.val(),
+            numero: numeroInput.val(),
+            bairro: bairroInput.val(), 
+            estado: estadoInput.val(),
+            cidade: cidadeInput.val(),
+            complemento: complementoInput.val(),
+            lng: longitudeInput.val(),
+            lat: latitudeInput.val()
+        }
 
-        axios.post("http://localhost:8081/user/usuario",usuario).then(response => {
+        axios.post("http://localhost:8081/e/estab",estabelecimento).then(response => {
             if(response.status == 200){
-                alert("Usuário cadastrado!");
-                window.location.href = "/";
+                console.log(estabelecimento)
+                alert("Estabelecimento cadastrado!");
+                window.location.href = "/cadastroEstabelecimento";
             }                
             
         }).catch(error => {
-            alert(error)
             console.log(error);
         });
 

@@ -77,9 +77,7 @@
                 }
         }
 
-        function showPosition(position) {
-            alert("Latitude: " + position.coords.latitude + 
-            "Longitude: " + position.coords.longitude);
+        function showPosition(position) {            
         }
 
         var sitEstabelecimento = 'Indefinido';
@@ -114,6 +112,7 @@
                         estabDistancia = (estabDistancia / 1000).toFixed(2);
                         estabDistancia += " km"
                     }else{
+                        estabDistancia = (estabDistancia / 1000).toFixed(2);
                         estabDistancia += " m"
                     }
                         

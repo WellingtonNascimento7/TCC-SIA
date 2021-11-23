@@ -129,7 +129,7 @@ function generateTags(estab){
 exports.estabProximo = (req, res, next) =>{
     let lng = parseFloat(req.query.lng);
     let lat = parseFloat(req.query.lat);
-    const maxDist = 10000;
+    const maxDist = 9999999999999;
     Endereco.aggregate([{
         $geoNear: {
         near: { 'type': 'Point',
